@@ -17,19 +17,16 @@ def sort(directory_path, categories):
             category = get_category(ext, categories)
 
             subfolder_path = os.path.join(directory_path, category)
+            os.makedirs(subfolder_path, exists_ok=True) #If the folder already exists, it skips this command
             dst = os.path.join(subfolder_path, file)
-            if not os.path.isdir(subfolder_path): #if the subfolder doesn't exists yet
-                #create that subfolder
-                #move the file there
-                os.makedirs(subfolder_path)
-                shutil.move(file_path, dst)
-            else: #if the subfolder already exists
-                i = 1
-                while os.path.exists(dst):
-                    new_name = f"{name}({i}){ext}"
-                    dst = os.path.join(subfolder_path, new_name)
-                    i += 1
-                shutil.move(file_path, dst)  
+
+            i = 1
+            while os.path.exists(dst):
+                new_name = f"{name}({i}){ext}"
+                dst = os.path.join(subfolder_path, new_name)
+                i += 1
+
+            shutil.move(file_path, dst)  
 
     print(f"Directory '{directory_path}' is successfuly organized")  
 
