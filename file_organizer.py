@@ -27,10 +27,8 @@ def sort(directory_path, categories):
                 dst = os.path.join(subfolder_path, file)
                 i = 1
                 while os.path.exists(dst):
-                    new_name = f"{name}({i}).{ext}"
-                    new_fname = os.path.join(new_name, ext)
-                    new_dst = os.path.join(subfolder_path, new_fname)
-                    dst = new_dst
+                    new_name = f"{name}({i}){ext}"
+                    dst = os.path.join(subfolder_path, new_name)
                     i += 1
                 shutil.move(file_path, dst)  
 
