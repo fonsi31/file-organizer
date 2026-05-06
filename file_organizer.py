@@ -17,14 +17,13 @@ def sort(directory_path, categories):
             category = get_category(ext, categories)
 
             subfolder_path = os.path.join(directory_path, category)
+            dst = os.path.join(subfolder_path, file)
             if not os.path.isdir(subfolder_path): #if the subfolder doesn't exists yet
                 #create that subfolder
                 #move the file there
-                os.makedirs(subfolder_path, exist_ok=True)
-                dst = os.path.join(subfolder_path, file)
+                os.makedirs(subfolder_path)
                 shutil.move(file_path, dst)
             else: #if the subfolder already exists
-                dst = os.path.join(subfolder_path, file)
                 i = 1
                 while os.path.exists(dst):
                     new_name = f"{name}({i}){ext}"
@@ -53,7 +52,7 @@ def main():
             break
 
         if not os.path.isdir(directory_path): #if you pass this, enter and access the directory
-            print(f"'{directory_path}' doesn't exists")
+            print(f"Directory {directory_path} doesn't exists")
             continue
   
         sort(directory_path, categories)
